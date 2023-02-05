@@ -1,14 +1,15 @@
 import axios from "axios"
 
 const instance = axios.create({
-    baseURL: 'http://localhost:8000/api' //process.env.REACT_APP_API_URL,
+    baseURL: process.env.REACT_APP_API_URL,
+    withCredentials: true
 })
 
 instance.defaults.headers.common['X-Requested-With'] = "XMLHttpRequest"
 instance.defaults.headers.common['X-CSRF-TOKEN'] = window.csrf_token
 instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
-//instance.defaults.headers.common['Access-Control-Allow-Methods'] = "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-//instance.defaults.withCredentials = true;
+instance.defaults.headers.common['Access-Control-Allow-Methods'] = "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+
 //instance.defaults.headers.common['Authorization'] = `Bearer ${''}`
 
 export default instance
