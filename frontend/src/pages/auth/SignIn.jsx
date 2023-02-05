@@ -45,22 +45,22 @@ const SignIn = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className='py-3'>
                             <InputText {...register('email')} className='border h-9 w-full text-[14px] px-3' placeholder="Email Address" />
-                            <ErrorMessage 
-                                errors={errors} 
-                                name="email" 
+                            <ErrorMessage
+                                errors={errors}
+                                name="email"
                                 render={({ type, message }) =>  <span key={type} className='text-[10px] text-red-700 py-2'>{message}</span>}
                             />
                         </div>
                         <div className='py-3'>
                             <InputText type='password' {...register('password')} className='border h-9 w-full text-[14px] px-3' placeholder="Password" />
-                            <ErrorMessage 
-                                errors={errors} 
-                                name="password" 
+                            <ErrorMessage
+                                errors={errors}
+                                name="password"
                                 render={({ type, message }) =>  <span key={type} className='text-[10px] text-red-700 py-2'>{message}</span>}
                             />
                         </div>
                         <div>
-                            <button className='bg-purple-700 h-9 w-full text-white text-[12px]'>Sign In</button>
+                            <button type='submit' className='bg-purple-700 h-9 w-full text-white text-[12px]'>Sign In</button>
                         </div>
                     </form>
                     <div className='py-6 w-full text-right'>
