@@ -5,7 +5,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import AuthLayout from 'src/components/layout/AuthLayout'
 import { useForm } from 'react-hook-form'
 import InputText from 'src/components/InputText'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import API from '../../util/API'
 
 const schema = yup
@@ -16,6 +16,7 @@ const schema = yup
   .required();
 
 const SignIn = () => {
+    const navigate = useNavigate()
     const { handleSubmit, register, formState: { errors } } = useForm({
         mode: 'onBlur',
         resolver: yupResolver(schema),
@@ -24,13 +25,19 @@ const SignIn = () => {
     useEffect(() => {
         // set page title
         document.title = "Sign In | Fuel Credit"
+        if(window.localStorage.getItem('token')){
+            return navigate('/dashboard')
+        }
     }, [])
 
     const onSubmit = async data => {
-        console.log(data)
         return await API.post('/login', data)
             .then((res) => {
-                console.log(res.data)
+                if(res.status === 200){
+                    window.localStorage.setItem('token', res.data['token'])
+                    window.localStorage.setItem('user', res.data['user'].name)
+                    navigate('/dashboard')
+                }
             }).catch((err) => {
                 console.log(err)
             })

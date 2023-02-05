@@ -82,6 +82,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
+                'user'  =>  $user,
                 'token' => $user->createToken(Str::slug($user->name))->plainTextToken
             ], Response::HTTP_OK);
 
