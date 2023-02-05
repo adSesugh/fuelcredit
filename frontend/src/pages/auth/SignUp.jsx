@@ -27,7 +27,6 @@ const SignUp = () => {
     }, [])
 
     const onSubmit = async data => {
-        console.log(API)
         return await API.post('/register', data)
             .then((res) => {
                 console.log(res.data)
@@ -43,7 +42,7 @@ const SignUp = () => {
                     <h1>Sign In to continue</h1>
                 </div>
                 <div className='px-8 xs:px-4'>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(onSubmit)} method="POST">
                         <div className='py-3'>
                             <InputText {...register('name')} className='border h-9 w-full text-[14px] px-3' placeholder="Full name" />
                             <ErrorMessage
